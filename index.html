@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paycivo — Recurring billing built for Indian SaaS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --ink2: #3a3a3a;
+    --ink3: #7a7a7a;
+    --paper: #fafaf7;
+    --accent: #2B5BFF;
+    --accent2: #0038d1;
+    --green: #00A878;
+    --red: #E84646;
+    --border: #e2e2dc;
+    --card: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-mark svg { width: 16px; height: 16px; }
+
+  .nav-badge {
+    font-size: 11px;
+    font-weight: 500;
+    background: #FFF3CD;
+    color: #92600A;
+    border: 1px solid #F0D080;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-link {
+    color: var(--ink2);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .nav-cta {
+    background: var(--ink);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .nav-cta:hover { background: #222; }
+
+  /* HERO */
+  .hero {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 96px 40px 80px;
+    text-align: center;
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--ink2);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+
+  .hero-form {
+    display: flex;
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto 16px;
+  }
+
+  .hero-input {
+    flex: 1;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background: white;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .hero-input:focus { border-color: var(--accent); }
+  .hero-input::placeholder { color: var(--ink3); }
+
+  .hero-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .hero-btn:hover { background: var(--accent2); }
+
+  .hero-note {
+    font-size: 13px;
+    color: var(--ink3);
+  }
+
+  /* PAIN SECTION */
+  .pain {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink3);
+    margin-bottom: 16px;
+  }
+
+  .pain-intro {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+    margin-bottom: 48px;
+    max-width: 640px;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .pain-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+    .hero, .pain, .features, .how, .pricing-section, .footer { padding-left: 20px; padding-right: 20px; }
+    .hero-form { flex-direction: column; }
+    .comparison-table { font-size: 13px; }
+  }
+
+  .pain-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .pain-card.red { border-left: 3px solid var(--red); }
+
+  .pain-icon {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .pain-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .pain-card p {
+    font-size: 14px;
+    color: var(--ink2);
+    line-height: 1.55;
+  }
+
+  .pain-stat {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    color: var(--red);
+    font-style: italic;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* FEATURES */
+  .features {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .features-intro {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+    max-width: 600px;
+  }
+
+  .features-sub {
+    color: var(--ink2);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 48px;
+    max-width: 520px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 720px) {
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .pain-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+
+  .feature-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .feature-card:hover { border-color: #b8c8ff; transform: translateY(-2px); }
+
+  .feature-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #EEF2FF;
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+
+  .feature-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .feature-card p {
+    font-size: 13px;
+    color: var(--ink2);
+    line-height: 1.6;
+  }
+
+  /* CODE SNIPPET */
+  .code-section {
+    background: var(--ink);
+    padding: 80px 40px;
+    margin: 0;
+  }
+
+  .code-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 700px) {
+    .code-inner { grid-template-columns: 1fr; }
+  }
+
+  .code-left h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .code-left p {
+    font-size: 15px;
+    color: #a0a0a0;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .code-block {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 24px;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #e0e0e0;
+  }
+
+  .code-block .k { color: #79B8FF; }
+  .code-block .s { color: #9ECBFF; }
+  .code-block .c { color: #6A737D; }
+  .code-block .f { color: #B392F0; }
+  .code-block .n { color: #FFAB70; }
+  .code-block .p { color: #e0e0e0; }
+
+  /* HOW IT WORKS */
+  .how {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 640px) {
+    .how-steps { grid-template-columns: 1fr; }
+  }
+
+  .how-step {
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .how-step h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .how-step p {
+    font-size: 14px;
+    color: var(--ink2);
+    line-height: 1.6;
+  }
+
+  /* COMPARISON */
+  .comparison-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .comparison-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 500;
+    background: #F7F7F5;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink2);
+  }
+
+  .comparison-table th:first-child { width: 38%; }
+
+  .comparison-table td {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink2);
+    vertical-align: middle;
+  }
+
+  .comparison-table tr:last-child td { border-bottom: none; }
+
+  .comparison-table tr:hover td { background: #FAFAF7; }
+
+  .check { color: var(--green); font-weight: 600; }
+  .cross { color: var(--red); }
+  .partial { color: #F59E0B; }
+
+  .col-paycivo { color: var(--accent); font-weight: 500; }
+
+  /* PRICING */
+  .pricing-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  .pricing-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .pricing-card.featured {
+    border-color: var(--accent);
+    background: #F5F7FF;
+  }
+
+  .pricing-badge {
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+
+  .pricing-name {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .pricing-price {
+    font-family: 'Instrument Serif', serif;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .pricing-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink3);
+    letter-spacing: 0;
+  }
+
+  .pricing-desc {
+    font-size: 13px;
+    color: var(--ink3);
+    margin-bottom: 24px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .pricing-features li {
+    font-size: 14px;
+    color: var(--ink2);
+    padding: 6px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .pricing-cta.primary {
+    background: var(--accent);
+    color: white;
+  }
+  .pricing-cta.primary:hover { background: var(--accent2); }
+
+  .pricing-cta.secondary {
+    background: white;
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+  }
+  .pricing-cta.secondary:hover { border-color: var(--ink); }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-left {
+    font-size: 13px;
+    color: var(--ink3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--ink3);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .fade-up.d1 { animation-delay: 0.1s; }
+  .fade-up.d2 { animation-delay: 0.2s; }
+  .fade-up.d3 { animation-delay: 0.3s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SUCCESS STATE */
+  .success-msg {
+    display: none;
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 500;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.5"/>
+        <path d="M5 5.5h4a2 2 0 0 1 0 4H5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M5 5.5v5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    paycivo
+  </a>
+  <div class="nav-right">
+    <span class="nav-badge">Early access</span>
+    <a class="nav-cta" href="#waitlist">Join waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label fade-up">Recurring billing for India</div>
+
+  <h1 class="fade-up d1">
+    The Stripe you never had,<br>
+    <em>built for Indian SaaS</em>
+  </h1>
+
+  <p class="hero-sub fade-up d2">
+    Stop losing subscribers to failed e-mandates, missing GST invoices, and zero dunning. Paycivo handles your entire billing stack — so you can focus on building.
+  </p>
+
+  <div id="waitlist" class="fade-up d3">
+    <div class="hero-form">
+      <input class="hero-input" type="email" id="email-input" placeholder="your@email.com" autocomplete="email">
+      <button class="hero-btn" onclick="handleWaitlist()">Get early access</button>
+    </div>
+    <p class="hero-note" id="hero-note">Free during beta · No credit card needed · Built for indie hackers</p>
+    <p class="success-msg" id="success-msg">🎉 You're on the list! We'll be in touch soon.</p>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="pain">
+  <p class="section-label">The problem</p>
+  <h2 class="pain-intro">
+    Indian SaaS billing is genuinely broken. Here's what it's costing you.
+  </h2>
+
+  <div class="pain-grid">
+    <div class="pain-card red">
+      <span class="pain-stat">60%</span>
+      <h3>Subscriptions lost to e-mandate failures</h3>
+      <p>When RBI's recurring payment rules kicked in, one Indian SaaS founder watched 60% of his active Indian subscribers disappear — cards just stopped working with zero warning.</p>
+    </div>
+
+    <div class="pain-card red">
+      <span class="pain-stat">55–90%</span>
+      <h3>UPI AutoPay failure rates in 2025</h3>
+      <p>Users lost subscriptions they actually wanted — not because they cancelled, but because AutoPay silently failed and nobody told you or them about it.</p>
+    </div>
+
+    <div class="pain-card red">
+      <h3>No GST invoice = no funding</h3>
+      <p>Investors now require GST returns, invoice samples, and reconciliations in due diligence. If your revenue doesn't match your tax filings, your credibility collapses — and penalties under Section 73 apply regardless.</p>
+    </div>
+
+    <div class="pain-card red">
+      <h3>Razorpay gives you a payment button. That's it.</h3>
+      <p>No dunning. No smart retries. No customer portal. No MRR analytics. You're stitching everything together manually — and losing revenue every month you don't notice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <p class="section-label">The solution</p>
+  <h2 class="features-intro">
+    Everything a billing layer should do, done right for India.
+  </h2>
+  <p class="features-sub">
+    Built on Razorpay so you don't need an RBI licence. Stripe-quality developer experience so you don't want to throw your laptop.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-tag">Payments</div>
+      <h3>UPI AutoPay + card mandates</h3>
+      <p>One integration handles both. We abstract away the e-mandate complexity so customers can subscribe in under 60 seconds.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">Recovery</div>
+      <h3>Smart dunning that actually works</h3>
+      <p>Automatic retries on failed payments, WhatsApp + email notifications, and a customer portal where subscribers can update their payment method themselves.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">Compliance</div>
+      <h3>GST invoices, auto-generated</h3>
+      <p>Every payment triggers a compliant GST invoice — GSTIN, HSN code, place of supply, the works. No CA required. No Excel involved.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">Analytics</div>
+      <h3>MRR, churn, and ARR dashboard</h3>
+      <p>See your real revenue metrics in real time. Track which plans convert, which customers are at risk of churning, and how much you recovered from failed payments.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">Portal</div>
+      <h3>Self-serve customer portal</h3>
+      <p>Let customers upgrade, downgrade, pause, or cancel without emailing you. Embed it in your app with one line of code.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">DX</div>
+      <h3>Stripe-quality developer experience</h3>
+      <p>Clean REST API, reliable webhooks, a sandbox that actually mirrors production, and docs written for humans — not enterprise sales teams.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CODE SECTION -->
+<section class="code-section">
+  <div class="code-inner">
+    <div class="code-left">
+      <h2>From zero to recurring billing in under an hour.</h2>
+      <p>One npm package. One API key. Handles subscriptions, webhooks, GST invoices, and dunning out of the box. No wrestling with Razorpay docs for days.</p>
+    </div>
+    <div class="code-block">
+      <pre><span class="c">// Install</span>
+<span class="k">npm</span> install paycivo
+
+<span class="c">// Create a subscription</span>
+<span class="k">import</span> <span class="p">{</span> Paycivo <span class="p">}</span> <span class="k">from</span> <span class="s">'paycivo'</span>
+
+<span class="k">const</span> <span class="n">client</span> = <span class="k">new</span> <span class="f">Paycivo</span><span class="p">(</span><span class="s">'pk_live_...'</span><span class="p">)</span>
+
+<span class="k">const</span> <span class="n">sub</span> = <span class="k">await</span> <span class="n">client</span>.<span class="f">subscriptions</span>.<span class="f">create</span><span class="p">({</span>
+  customer<span class="p">:</span> <span class="s">'cust_123'</span><span class="p">,</span>
+  plan<span class="p">:</span> <span class="s">'plan_pro_monthly'</span><span class="p">,</span>
+  gst_number<span class="p">:</span> <span class="s">'27AAPFU0939F1ZV'</span>
+<span class="p">})</span>
+
+<span class="c">// GST invoice auto-generated ✓</span>
+<span class="c">// Webhook fired ✓</span>
+<span class="c">// Dunning configured ✓</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="section-label">How it works</p>
+  <h2 class="features-intro">Up and running in three steps.</h2>
+
+  <div class="how-steps">
+    <div class="how-step">
+      <span class="step-num">Step 01</span>
+      <h3>Connect your Razorpay account</h3>
+      <p>Paste your Razorpay API keys. We handle the rest — no RBI paperwork, no entity registration, no waiting months for approvals.</p>
+    </div>
+
+    <div class="how-step">
+      <span class="step-num">Step 02</span>
+      <h3>Define your plans</h3>
+      <p>Create monthly, annual, or usage-based plans in the dashboard. Set your INR price, trial period, and GST category. Done in 5 minutes.</p>
+    </div>
+
+    <div class="how-step">
+      <span class="step-num">Step 03</span>
+      <h3>Ship a checkout link or embed our SDK</h3>
+      <p>One link to send customers, or five lines of code to embed checkout in your app. Subscriptions start flowing. Invoices generate automatically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison-section">
+  <p class="section-label">Comparison</p>
+  <h2 class="features-intro" style="margin-bottom: 0;">How Paycivo compares.</h2>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th class="col-paycivo">Paycivo</th>
+        <th>Razorpay alone</th>
+        <th>Chargebee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UPI AutoPay subscriptions</td>
+        <td class="check">✓</td>
+        <td class="partial">Partial</td>
+        <td class="cross">✗ India limited</td>
+      </tr>
+      <tr>
+        <td>Auto GST invoice generation</td>
+        <td class="check">✓</td>
+        <td class="cross">✗ Manual</td>
+        <td class="partial">Partial</td>
+      </tr>
+      <tr>
+        <td>Dunning + smart retries</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Customer self-serve portal</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>MRR / churn analytics</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>WhatsApp payment reminders</td>
+        <td class="check">✓</td>
+        <td class="cross">✗</td>
+        <td class="cross">✗</td>
+      </tr>
+      <tr>
+        <td>Pricing (for indie hackers)</td>
+        <td class="check">₹999/mo</td>
+        <td class="check">~2% per txn</td>
+        <td class="cross">$249/mo+</td>
+      </tr>
+      <tr>
+        <td>Setup time</td>
+        <td class="check">&lt; 1 hour</td>
+        <td class="partial">Days</td>
+        <td class="cross">Weeks</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <p class="section-label">Pricing</p>
+  <h2 class="features-intro">Simple pricing. No surprises.</h2>
+  <p class="features-sub">Razorpay's ~2% transaction fee still applies on top. That's it. No per-seat pricing, no feature gating, no enterprise contracts.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <p class="pricing-name">Indie</p>
+      <p class="pricing-price">₹999 <span>/ month</span></p>
+      <p class="pricing-desc">For solo founders and early-stage products</p>
+      <ul class="pricing-features">
+        <li>Up to ₹5L MRR</li>
+        <li>UPI AutoPay + card subscriptions</li>
+        <li>Auto GST invoice generation</li>
+        <li>Basic dunning (3 retries)</li>
+        <li>Customer portal</li>
+        <li>MRR dashboard</li>
+        <li>Email support</li>
+      </ul>
+      <a href="#waitlist" class="pricing-cta secondary">Join waitlist</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <span class="pricing-badge">Most popular</span>
+      <p class="pricing-name">Growth</p>
+      <p class="pricing-price">₹2,499 <span>/ month</span></p>
+      <p class="pricing-desc">For products with real traction</p>
+      <ul class="pricing-features">
+        <li>Unlimited MRR</li>
+        <li>Everything in Indie</li>
+        <li>Smart dunning with WhatsApp reminders</li>
+        <li>Churn prediction alerts</li>
+        <li>Multiple plans + coupons</li>
+        <li>Annual billing with prorations</li>
+        <li>Priority support + onboarding call</li>
+      </ul>
+      <a href="#waitlist" class="pricing-cta primary">Join waitlist</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">
+    © 2026 Paycivo · Built for Indian indie hackers
+  </div>
+  <div class="footer-links">
+    <a href="#">Twitter</a>
+    <a href="#">Docs</a>
+    <a href="mailto:hello@paycivo.io">hello@paycivo.io</a>
+  </div>
+</footer>
+
+<script>
+  function handleWaitlist() {
+    const email = document.getElementById('email-input').value.trim()
+    if (!email || !email.includes('@')) {
+      document.getElementById('email-input').style.borderColor = '#E84646'
+      setTimeout(() => {
+        document.getElementById('email-input').style.borderColor = ''
+      }, 1500)
+      return
+    }
+    document.getElementById('hero-note').style.display = 'none'
+    document.getElementById('email-input').style.display = 'none'
+    document.querySelector('.hero-btn').style.display = 'none'
+    document.getElementById('success-msg').style.display = 'block'
+  }
+
+  document.getElementById('email-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleWaitlist()
+  })
+</script>
+
+</body>
+</html>
